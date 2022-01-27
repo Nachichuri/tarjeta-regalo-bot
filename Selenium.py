@@ -3,19 +3,17 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.options import Options
 
 url = r'https://visahome.prismamediosdepago.com/socios/service/giftCard'
 
 
 def get_balance(card_num):
     # We create the driver
-    options = webdriver.FirefoxOptions()
+    options = Options()
     options.add_argument('--headless')
-    service = Service(GeckoDriverManager().install())
-    driver = webdriver.Firefox(service=service, options=options)
+    options.add_argument('--no-sandbox')
+    driver = webdriver.Chrome('/bot/chromedriver', options=options)
 
     # Go to the webpage
     driver.get(url)
